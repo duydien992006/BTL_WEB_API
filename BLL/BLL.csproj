@@ -136,15 +136,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoBusiness.cs" />
     <Compile Include="CongTyBusiness.cs" />
+    <Compile Include="DeNghiTuyenDungBusiness.cs" />
+    <Compile Include="DonUngTuyenBusiness.cs" />
+    <Compile Include="HoSoBusiness.cs" />
+    <Compile Include="Interfaces\IBaoCaoBusiness.cs" />
     <Compile Include="Interfaces\ICongTyBusiness.cs" />
+    <Compile Include="Interfaces\IDeNghiTuyenDungBusiness.cs" />
+    <Compile Include="Interfaces\IDonUngTuyenBusiness.cs" />
     <Compile Include="Interfaces\IHoSoBusiness.cs" />
     <Compile Include="Interfaces\IKyNangBusiness.cs" />
+    <Compile Include="Interfaces\ILichPhongVanBusiness.cs" />
     <Compile Include="Interfaces\INguoiDungBusiness.cs" />
+    <Compile Include="Interfaces\IThongBaoBusiness.cs" />
     <Compile Include="Interfaces\ITinTuyenDungBusiness.cs" />
     <Compile Include="KyNangBusiness.cs" />
+    <Compile Include="LichPhongVanBusiness.cs" />
     <Compile Include="NguoiDungBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThongBaoBusiness.cs" />
     <Compile Include="TinTuyenDungBusiness.cs" />
   </ItemGroup>
   <ItemGroup>

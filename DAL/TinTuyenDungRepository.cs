@@ -23,7 +23,6 @@ namespace DAL
         {
             var bangKyNang = _dbHelper.TaoBangId(model.DanhSachKyNangId);
 
-            // Bắt buộc dùng DynamicParameters vì object ẩn danh (new {...}) không hỗ trợ gắn TVP
             var thamSo = new DynamicParameters();
             thamSo.Add("CongTyId", model.CongTyId);
             thamSo.Add("TieuDe", model.TieuDe);
@@ -32,7 +31,7 @@ namespace DAL
             thamSo.Add("MucLuongTu", model.MucLuongTu);
             thamSo.Add("MucLuongDen", model.MucLuongDen);
             thamSo.Add("NgayHetHan", model.NgayHetHan);
-            // "DanhSachIntType" phải khớp chính xác tên Type đã CREATE TYPE bên SQL Server
+
             thamSo.Add("DanhSachKyNang", bangKyNang.AsTableValuedParameter("DanhSachIntType"));
 
             return await _dbHelper.ExecuteScalarAsync<int>("sp_tintuyendung_tao", thamSo);

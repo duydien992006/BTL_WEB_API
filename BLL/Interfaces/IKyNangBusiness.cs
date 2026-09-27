@@ -9,6 +9,7 @@ namespace BLL.Interfaces
 {
     public partial interface IKyNangBusiness
     {
+        Task<PhanHoiModel> TaoAsync(TaoKyNangModel model);   // đổi tham số
         Task<IEnumerable<KyNangModel>> LayTatCaAsync();
         Task<IEnumerable<KyNangModel>> TimKiemAsync(string tuKhoa);
     }

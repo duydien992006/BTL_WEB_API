@@ -17,6 +17,21 @@ namespace BLL
             _repo = repo;
         }
 
+        public async Task<PhanHoiModel> TaoAsync(TaoKyNangModel model)
+        {
+            // Nghiệp vụ: không cho tạo kỹ năng với tên rỗng
+            if (string.IsNullOrWhiteSpace(model?.TenKyNang))
+            {
+                return new PhanHoiModel { ThanhCong = false, ThongDiep = "Tên kỹ năng không được để trống" };
+            }
+
+            // Nghiệp vụ: chuẩn hóa dữ liệu trước khi lưu (xóa khoảng trắng thừa ở đầu/cuối)
+            string tenKyNang = model.TenKyNang.Trim();
+
+            int id = await _repo.TaoAsync(tenKyNang);
+            return new PhanHoiModel { ThanhCong = true, ThongDiep = "Tạo kỹ năng thành công", DuLieu = id };
+        }
+
         public async Task<IEnumerable<KyNangModel>> LayTatCaAsync()
         {
             return await _repo.LayTatCaAsync();
@@ -28,3 +43,4 @@ namespace BLL
         }
     }
 }
+

@@ -11,4 +11,8 @@ namespace Model
         public int Id { get; set; }
         public string TenKyNang { get; set; }
     }
+    public class TaoKyNangModel
+    {
+        public string TenKyNang { get; set; }
+    }
 }

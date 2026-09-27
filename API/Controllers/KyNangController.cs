@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace API.Controllers
 {
@@ -11,6 +12,14 @@ namespace API.Controllers
         public KyNangController(IKyNangBusiness business)
         {
             _business = business;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Tao([FromBody] TaoKyNangModel model)
+        {
+            var kq = await _business.TaoAsync(model);
+            if (kq.ThanhCong) return Ok(kq);
+            return BadRequest(kq);
         }
 
         [HttpGet]

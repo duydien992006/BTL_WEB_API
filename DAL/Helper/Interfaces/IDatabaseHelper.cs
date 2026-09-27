@@ -35,7 +35,6 @@ namespace DAL.Helper.Interfaces
         DataTable TaoBangId(IEnumerable<int> danhSachId);
     }
 
-    // C# 7.3 hỗ trợ ValueTuple nhưng để rõ ràng, dùng 1 class chứa 2 kết quả thay vì tuple ẩn danh phức tạp
     public class KetQuaKep<T1, T2>
     {
         public T1 KetQua1 { get; set; }

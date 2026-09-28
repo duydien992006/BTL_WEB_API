@@ -13,6 +13,7 @@ namespace BLL
     {
         private readonly IDonUngTuyenRepository _repo;
         private readonly ITinTuyenDungRepository _tinRepo;
+        private readonly ICongTyRepository _congTyRepo;   // MỚI THÊM
         private readonly IThongBaoBusiness _thongBaoBusiness;
 
         private static readonly Dictionary<string, string[]> LuongHopLe = new Dictionary<string, string[]>
@@ -23,10 +24,11 @@ namespace BLL
             { "DeNghi", new string[] { "TuChoi" } }
         };
 
-        public DonUngTuyenBusiness(IDonUngTuyenRepository repo, ITinTuyenDungRepository tinRepo, IThongBaoBusiness thongBaoBusiness)
+        public DonUngTuyenBusiness(IDonUngTuyenRepository repo, ITinTuyenDungRepository tinRepo, ICongTyRepository congTyRepo/*Mới thêm*/, IThongBaoBusiness thongBaoBusiness)
         {
             _repo = repo;
             _tinRepo = tinRepo;
+            _congTyRepo = congTyRepo;                    // MỚI THÊM
             _thongBaoBusiness = thongBaoBusiness;
         }
 
@@ -46,7 +48,12 @@ namespace BLL
 
             int id = await _repo.NopDonAsync(model.TinTuyenDungId, model.HoSoId, ungVienId);
 
-            await _thongBaoBusiness.TaoAsync(tin.CongTyId, "Có ứng viên mới ứng tuyển vào tin: " + tin.TieuDe);
+            // SỬA: lấy đúng Id người đại diện công ty, không dùng CongTyId nữa
+            var congTy = await _congTyRepo.LayTheoIdAsync(tin.CongTyId);
+            if (congTy != null)
+            {
+                await _thongBaoBusiness.TaoAsync(congTy.NguoiDaiDienId, "Có ứng viên mới ứng tuyển vào tin: " + tin.TieuDe);
+            }
 
             return new PhanHoiModel { ThanhCong = true, ThongDiep = "Nộp đơn thành công", DuLieu = id };
         }
